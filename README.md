@@ -9,8 +9,7 @@ A simple Maybe implementation in Reason.
 **`bsconfig.json`**
 ```json
 "bs-dependencies": [
-  "reason-react",
-  "reason-apollo"
+  "reason-maybe"
 ]
 ```
 
