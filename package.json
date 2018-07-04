@@ -19,7 +19,7 @@
     "type": "git",
     "url": "https://github.com/johnpaulada/reason-maybe"
   },
-  "homepage": "https://github.com/reasonml/reason-maybe",
+  "homepage": "https://www.npmjs.com/package/reason-maybe",
   "bugs": {
     "email": "johnpaulada@gmail.com",
     "url": "https://github.com/reasonml/reason-maybe/issues"

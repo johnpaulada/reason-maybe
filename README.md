@@ -1,6 +1,9 @@
 # reason-maybe
 A simple Maybe library in Reason.
 
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![Made with Reason](https://img.shields.io/badge/Made%20with-Reason-red.svg?longCache=true&style=for-the-badge)](https://reasonml.github.io/)
+
 ## Installation
 - Install [Yarn](https://yarnpkg.com).
 - Run `yarn add reason-maybe`.
