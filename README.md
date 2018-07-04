@@ -1,7 +1,28 @@
 # reason-maybe
-A simple Maybe implementation in Reason. 
+A simple Maybe implementation in Reason.
+
+## Installation
+- Install [Yarn](https://yarnpkg.com).
+- Run `yarn add reason-maybe`.
+- Add `reason-maybe` to your `bs-dependencies` in `bsconfig.json`
+
+**`bsconfig.json`**
+```json
+"bs-dependencies": [
+  "reason-react",
+  "reason-apollo"
+]
+```
+
+## Usage
+> Examples to come
 
 ## Development
+
+1. Clone this repo.
+2. Move to this directory with `cd reason-maybe`.
+3. Install [Yarn](https://yarnpkg.com).
+4. Run `yarn`.
 
 ### Build
 ```
