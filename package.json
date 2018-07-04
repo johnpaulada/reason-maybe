@@ -8,7 +8,7 @@
     "clean": "bsb -clean-world"
   },
   "keywords": [
-    "BuckleScript", "maybe", "monad", "reasonml", "library"
+    "BuckleScript", "maybe", "monad", "reasonml", "library", "functional-programming"
   ],
   "author": "",
   "license": "MIT",
