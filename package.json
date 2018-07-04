@@ -1,14 +1,19 @@
 {
   "name": "reason-maybe",
   "description": "A simple Maybe library in Reason.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world"
   },
   "keywords": [
-    "BuckleScript", "maybe", "monad", "reasonml", "library", "functional-programming"
+    "BuckleScript",
+    "maybe",
+    "monad",
+    "reasonml",
+    "library",
+    "functional-programming"
   ],
   "author": "",
   "license": "MIT",
