@@ -1,5 +1,5 @@
 # reason-maybe
-A simple Maybe implementation in Reason.
+A simple Maybe library in Reason.
 
 ## Installation
 - Install [Yarn](https://yarnpkg.com).

@@ -1,5 +1,6 @@
 {
   "name": "reason-maybe",
+  "description": "A simple Maybe library in Reason.",
   "version": "0.1.0",
   "scripts": {
     "build": "bsb -make-world",
@@ -7,11 +8,20 @@
     "clean": "bsb -clean-world"
   },
   "keywords": [
-    "BuckleScript", "maybe", "monad", "reasonml"
+    "BuckleScript", "maybe", "monad", "reasonml", "library"
   ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "bs-platform": "^3.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnpaulada/reason-maybe"
+  },
+  "homepage": "https://github.com/reasonml/reason-maybe",
+  "bugs": {
+    "email": "johnpaulada@gmail.com",
+    "url": "https://github.com/reasonml/reason-maybe/issues"
   }
 }
