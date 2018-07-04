@@ -17,7 +17,10 @@ A simple Maybe library in Reason.
 ```
 
 ## Usage
-> Examples to come
+To create a Maybe use `Maybe.from`:
+```reason
+let one = Maybe.from(Some(1))
+```
 
 ## Development
 
