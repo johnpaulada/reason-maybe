@@ -99,7 +99,9 @@ let invalidArticleRoute = getArticleRoute("");
 Js.log(invalidArticleRoute); /* /not_found */
 ```
 
-Alternatively, you can import the equivalent infix operator `<->`:
+If the Maybe is a `Just`, the `hasslug` method will be called. If the Maybe is a `Nothing`, the `noslug` will be called.
+
+If want it to be less verbose, you can import and use the equivalent infix operator `<->`:
 ```reason
 let (<->) = Maybe.(<->);
 let (|||>) = Maybe.(|||>);
