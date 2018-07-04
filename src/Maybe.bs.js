@@ -33,9 +33,7 @@ function reduce(fn, x) {
 
 function chain(fn, x) {
   if (x) {
-    var value = reduce((function (x) {
-            return x;
-          }), Curry._1(fn, x[0]));
+    var value = reduce(identity, Curry._1(fn, x[0]));
     if (value) {
       return /* Just */[value[0]];
     } else {
@@ -48,9 +46,9 @@ function chain(fn, x) {
 
 function value($$default, x) {
   if (x) {
-    return /* Some */[x[0]];
+    return x[0];
   } else {
-    return /* Some */[$$default];
+    return $$default;
   }
 }
 

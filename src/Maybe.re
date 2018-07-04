@@ -29,7 +29,7 @@ let reduce = (fn : ('a => 'b), x : maybe('a)) : option('b) =>
 let chain = (fn : ('a => maybe('b)), x : maybe('a)) : maybe('b) =>
   switch x {
     | Just(v) => {
-      let value = fn(v) |> reduce(x => x);
+      let value = fn(v) |> reduce(identity);
 
       switch value {
         | Some(y) => Just(y)
@@ -40,10 +40,10 @@ let chain = (fn : ('a => maybe('b)), x : maybe('a)) : maybe('b) =>
   }
 ;
 
-let value = (default : 'a, x : maybe('a)) : option('a) =>
+let value = (default : 'a, x : maybe('a)) : 'a =>
   switch x {
-    | Just(v) => Some(v)
-    | Nothing => Some(default)
+    | Just(v) => v
+    | Nothing => default
   }
 ;
 
