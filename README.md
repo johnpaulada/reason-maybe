@@ -33,12 +33,26 @@ let plusOne = x => x + 1;
 let onePlusOne = one |> Maybe.map(plusOne); /* Just(2) */
 ```
 
-If the map provides a value, it will return `Just(value)`. Else, it will return a `Nothing`.
+Alternatively, you can import the equivalent infix operator `||>`:
+```reason
+let (||>) = Maybe.(||>)
+
+let onePlusOne = one ||> plusOne; /* Just(2) */
+```
+
+If the map operation provides a value, it will return `Just(value)`. Else, it will return a `Nothing`.
 
 ### `value`
 To extract the value of the Maybe, we need to use `Maybe.value`:
 ```reason
 let value = onePlusOne |> Maybe.value(0); /* 2 */
+```
+
+Alternatively, you can import the equivalent infix operator `>|`:
+```reason
+let (>|) = Maybe.(>|)
+
+let value = onePlusOne >| 0; /* 2 */
 ```
 
 If the Maybe was actually a `Nothing`, the value given to the `Maybe.value` function will be the resulting value.
@@ -50,6 +64,13 @@ To run a function that returns a Maybe on a Maybe, we use `Maybe.chain`:
 let two = Maybe.from(Some(2));
 let plusOneMaybe = x => one |> Maybe.map(y => x + y);
 let twoPlusOneMaybe = two |> Maybe.chain(plusOneMaybe); /* Just(3) */
+```
+
+Alternatively, you can import the equivalent infix operator `|||>`:
+```reason
+let (|||>) = Maybe.(|||>)
+
+let twoPlusOneMaybe = two |||> plusOneMaybe; /* Just(3) */
 ```
 
 We use the `plusOneMaybe` function which returns a Maybe on the `two` Maybe.

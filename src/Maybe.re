@@ -70,28 +70,6 @@ let branch = (left : ('a => 'b), right : ('a => 'b), x : maybe('a)) : maybe('b) 
   }
 ;
 
-let rec create = (x : option('a)) => {
-  map : (fn) => {
-    switch x {
-      | Some(v) => {
-          let mapped = map(fn, Just(v));
-
-          switch mapped {
-            | Just(v) => create(Some(v))
-            | Nothing => create(None)
-          }
-        }
-      | None => create(None)
-    }
-  },
-  value : (v) => {
-    switch x {
-      | Some(y) => value(v, Just(y))
-      | None => value(v, Nothing)
-    }
-  }
-}
-
 /* Pipe */
 let (>>) = (x, y) => z => z |> x |> y;
 
@@ -112,3 +90,25 @@ let (>||) = (x, y) => x |> (y |> reduce)
 
 /* Branch */
 let (<->) = (x, y) => z => branch(x, y, z)
+
+let rec create = (x : option('a)) => {
+  map : (fn) => {
+    switch x {
+      | Some(v) => {
+          let mapped = Just(v) ||> fn;
+
+          switch mapped {
+            | Just(v) => create(Some(v))
+            | Nothing => create(None)
+          }
+        }
+      | None => create(None)
+    }
+  },
+  value : (v) => {
+    switch x {
+      | Some(y) => Just(y) >| v
+      | None => Nothing >| v
+    }
+  }
+}
