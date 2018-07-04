@@ -5,7 +5,8 @@ type maybe('a) =
 
 type maybe_('a, 'b) = {
   map : ('a => 'b) => maybe_('a, 'b),
-  value : 'a => 'a
+  value : 'a => 'a,
+  reduce: ('a => 'b) => option('b)
 }
 
 let identity = x => x
@@ -70,26 +71,30 @@ let branch = (left : ('a => 'b), right : ('a => 'b), x : maybe('a)) : maybe('b) 
   }
 ;
 
-/* Pipe */
+/* Reverse Pipe */
+let (<|) = (x, y) => y |> x;
+
+/* Pipe Compose */
 let (>>) = (x, y) => z => z |> x |> y;
 
 /* Compose */
 let (<<) = (x, y) => z => z |> y |> x;
 
 /* Map */
-let (||>) = (x, y) => x |> (y |> map)
+
+let (||>) = (x, y) => y |> map <| x
 
 /* Chain */
-let (|||>) = (x, y) => x |> (y |> chain)
+let (|||>) = (x, y) => y |> chain <| x
 
 /* Value */
-let (>|) = (x, y) => x |> (y |> value)
+let (>|) = (x, y) => y |> value <| x
 
 /* Reduce */
-let (>||) = (x, y) => x |> (y |> reduce)
+let (>||) = (x, y) => y |> reduce <| x
 
 /* Branch */
-let (<->) = (x, y) => z => branch(x, y, z)
+let (<->) = (x, y) => z => z |> branch(x, y)
 
 let rec create = (x : option('a)) => {
   map : (fn) => {
@@ -109,6 +114,12 @@ let rec create = (x : option('a)) => {
     switch x {
       | Some(y) => Just(y) >| v
       | None => Nothing >| v
+    }
+  },
+  reduce : (fn) => {
+    switch x {
+      | Some(y) => Just(y) >|| fn
+      | None => Nothing >|| fn
     }
   }
 }

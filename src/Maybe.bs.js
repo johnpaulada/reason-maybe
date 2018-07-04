@@ -68,6 +68,10 @@ function branch(left, right, x) {
   }
 }
 
+function $less$pipe(x, y) {
+  return Curry._1(x, y);
+}
+
 function $great$great(x, y, z) {
   return Curry._1(y, Curry._1(x, z));
 }
@@ -114,6 +118,13 @@ function create(x) {
               } else {
                 return v;
               }
+            }),
+          /* reduce */(function (fn) {
+              if (x) {
+                return reduce(fn, /* Just */[x[0]]);
+              } else {
+                return /* None */0;
+              }
             })
         ];
 }
@@ -126,6 +137,7 @@ exports.chain = chain;
 exports.value = value;
 exports.ap = ap;
 exports.branch = branch;
+exports.$less$pipe = $less$pipe;
 exports.$great$great = $great$great;
 exports.$less$less = $less$less;
 exports.$pipe$pipe$great = $pipe$pipe$great;
