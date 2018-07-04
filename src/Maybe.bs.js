@@ -68,6 +68,56 @@ function branch(left, right, x) {
   }
 }
 
+function create(x) {
+  return /* record */[
+          /* map */(function (fn) {
+              if (x) {
+                var mapped = map(fn, /* Just */[x[0]]);
+                if (mapped) {
+                  return create(/* Some */[mapped[0]]);
+                } else {
+                  return create(/* None */0);
+                }
+              } else {
+                return create(/* None */0);
+              }
+            }),
+          /* value */(function (v) {
+              if (x) {
+                return value(v, /* Just */[x[0]]);
+              } else {
+                return v;
+              }
+            })
+        ];
+}
+
+function $great$great(x, y, z) {
+  return Curry._1(y, Curry._1(x, z));
+}
+
+function $less$less(x, y, z) {
+  return Curry._1(x, Curry._1(y, z));
+}
+
+function $pipe$pipe$great(x, y) {
+  return map(y, x);
+}
+
+function $pipe$pipe$pipe$great(x, y) {
+  return chain(y, x);
+}
+
+function $great$pipe(x, y) {
+  return value(y, x);
+}
+
+function $great$pipe$pipe(x, y) {
+  return reduce(y, x);
+}
+
+var $less$neg$great = branch;
+
 exports.identity = identity;
 exports.from = from;
 exports.map = map;
@@ -76,4 +126,12 @@ exports.chain = chain;
 exports.value = value;
 exports.ap = ap;
 exports.branch = branch;
+exports.create = create;
+exports.$great$great = $great$great;
+exports.$less$less = $less$less;
+exports.$pipe$pipe$great = $pipe$pipe$great;
+exports.$pipe$pipe$pipe$great = $pipe$pipe$pipe$great;
+exports.$great$pipe = $great$pipe;
+exports.$great$pipe$pipe = $great$pipe$pipe;
+exports.$less$neg$great = $less$neg$great;
 /* No side effect */

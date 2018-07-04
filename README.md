@@ -50,7 +50,7 @@ To run a function that returns a Maybe on a Maybe, we use `Maybe.chain`:
 let two = Maybe.from(Some(2));
 let plusOneMaybe = x => one |> Maybe.map(y => x + y);
 let twoPlusOneMaybe = two |> Maybe.chain(plusOneMaybe); /* Just(3) */
-``` 
+```
 
 We use the `plusOneMaybe` function which returns a Maybe on the `two` Maybe.
 Instead of `Maybe.map`, we use `Maybe.chain` to lift it from the returned Maybe unto the current Maybe.
