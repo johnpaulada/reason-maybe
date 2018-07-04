@@ -35,7 +35,7 @@ let onePlusOne = one |> Maybe.map(plusOne); /* Just(2) */
 
 Alternatively, you can import the equivalent infix operator `||>`:
 ```reason
-let (||>) = Maybe.(||>)
+let (||>) = Maybe.(||>);
 
 let onePlusOne = one ||> plusOne; /* Just(2) */
 ```
@@ -50,7 +50,7 @@ let value = onePlusOne |> Maybe.value(0); /* 2 */
 
 Alternatively, you can import the equivalent infix operator `>|`:
 ```reason
-let (>|) = Maybe.(>|)
+let (>|) = Maybe.(>|);
 
 let value = onePlusOne >| 0; /* 2 */
 ```
@@ -68,13 +68,60 @@ let twoPlusOneMaybe = two |> Maybe.chain(plusOneMaybe); /* Just(3) */
 
 Alternatively, you can import the equivalent infix operator `|||>`:
 ```reason
-let (|||>) = Maybe.(|||>)
+let (|||>) = Maybe.(|||>);
 
 let twoPlusOneMaybe = two |||> plusOneMaybe; /* Just(3) */
 ```
 
 We use the `plusOneMaybe` function which returns a Maybe on the `two` Maybe.
 Instead of `Maybe.map`, we use `Maybe.chain` to lift it from the returned Maybe unto the current Maybe.
+
+### `branch`
+If the Maybe has turned into a Nothing and you want to handle that, you can use `Maybe.branch`:
+```reason
+let addToRoute = s => x =>
+  switch s {
+    | "" => Maybe.Nothing
+    | v => Maybe.Just(x ++ v)
+  }
+;
+let noslug = () => "/not_found";
+let hasslug = v => v
+let getArticleRoute = slug => Maybe.from(Some("/articles/"))
+  |> Maybe.chain(addToRoute(slug))
+  |> Maybe.branch(noslug, hasslug)
+  |> Maybe.value("/articles");
+
+let validArticleRoute = getArticleRoute("awesome");
+Js.log(validArticleRoute); /* /articles/awesome */
+
+let invalidArticleRoute = getArticleRoute("");
+Js.log(invalidArticleRoute); /* /not_found */
+```
+
+Alternatively, you can import the equivalent infix operator `<->`:
+```reason
+let (<->) = Maybe.(<->);
+let (|||>) = Maybe.(|||>);
+let (>|) = Maybe.(>|);
+
+/* Previously defined functions here */
+
+let getArticleRoute = slug =>
+    Maybe.from(Some("/articles/"))
+        |||> addToRoute(slug)
+        |> (noslug <-> hasslug)
+        >| "/articles"
+;
+
+let validArticleRoute = getArticleRoute("awesome");
+Js.log(validArticleRoute); /* /articles/awesome */
+
+let invalidArticleRoute = getArticleRoute("");
+Js.log(invalidArticleRoute); /* /not_found */
+```
+
+This form is less readable but more terse yields the same result.
 
 ## Development
 

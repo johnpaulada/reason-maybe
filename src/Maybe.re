@@ -64,7 +64,7 @@ let ap = (fn : maybe('a => 'b), x : maybe('a)) : maybe('b) =>
   }
 ;
 
-let branch = (left : ('a => 'b), right : ('a => 'b), x : maybe('a)) : maybe('b) =>
+let branch = (left : (unit => 'b), right : ('a => 'b), x : maybe('a)) : maybe('b) =>
   switch x {
     | Just(v) => Just(v |> right)
     | Nothing => Just(left())
@@ -81,7 +81,6 @@ let (>>) = (x, y) => z => z |> x |> y;
 let (<<) = (x, y) => z => z |> y |> x;
 
 /* Map */
-
 let (||>) = (x, y) => y |> map <| x
 
 /* Chain */
